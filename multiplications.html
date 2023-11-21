@@ -6,15 +6,47 @@
         <meta name = "viewport" content = "width = device- width, initial - scale = 1.0">
         <title> Multiplications </title>
     </head>
-    <body>
+    <body onload = "multiply(5)">
         <div id = "id">
             <form>
                 <laber for = "formNumber"> Number (1-10): </laber>
                 <input type = "number"  id = "number" name = "formNumber"
-                    min = "1" max = "10" value = "5"    >
-                <input type = "button" id = "button" name = "formButton"
-                value="Show">
+                    min = "1" max = "10" value = "5">
+                <input  onclick = "multiply(document.getElementById('number').value);" 
+                    type = "button" id = "button" name = "formButton"
+                    value = "Show">
             </form>
         </div>
+        
+        <div id = "multiplicationTable">
+            <p> JavaScript is disabled or something else went wrong. </p>
+        </div>
+
+        <script>
+            function multiply(number) {
+                let output = "";
+
+                if(number >= 1 && number <= 10){
+                    output = "<p> Multiplication table (from 1 to 10) of " 
+                        + number + ": </p>";
+                    
+                        output = output + "<table>";
+                        for(let i = 0; i < 10; i++) {
+                            output = output +  "<tr>";
+                            output = output + "<td>" 
+                                + (i + 1) + " x " + number + " = "
+                                + ((i + 1) * number)
+                                + "</td>";
+                            output = output + "</tr>";
+                        }
+
+                        output = output + "<table>";
+                    }
+                else {
+                    output = "<p> Give a number from 1- 10 </p>";
+                }
+                document.getElementById('multiplicationTable').innerHTML = output;
+            }
+        </script>
     </body>
 </html>
