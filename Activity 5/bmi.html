@@ -1,0 +1,98 @@
+<!--
+    Example BMI - Activity 5 a and b - HTML parts
+
+	BMI counter implemented as a dynamic web page with JavaScript.
+    In addition to the calculated BMI, it shows the min and max BMI
+    calculated. It is possible to select to save the previous height
+    and weight and the min and max BMI. Saving is done using local storage.
+    Local storage is emptied when saving is turned off.
+
+    In this implementation, BMI is calculated as follows:
+    BMI = weight / (height * height),
+    where weight is in kilograms and height in meters.
+
+    The logic in the JavaScript is as follows:
+    When the page is loaded, it is checked if there are saved data
+    in the local storage. If there is, they are shown and BMI is
+    calculated based on them. Also, in this case, the radio button for
+    saving is set to "Yes". 
+
+    If there are no saved data, the height is set to 170 cm and weight to
+    65 kg and the BMI is calculated based on them. Also, in this case,
+    the radio button for saving is set to "No".
+
+    The BMI is calculated everytime either the height or weight is changed.
+    If the radio button for saving is set to "Yes", the data is also saved
+    (height and weight every time and BMI if it is either min or max).
+
+    In addition, when the radio button is switched to "Yes" the data is
+    saved to thelocal strage and when it is switched to "No", the data
+    is removed from the local storage.
+-->
+<!DOCTYPE html>
+
+<html lang = "">
+    <head>
+        <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BMI calculator</title>
+    </head>
+    <!-- Event onload is used to call function init() when the
+         page loads.
+    -->
+    <body onload="init();">
+        <!-- Element div for the form having inputs for the
+             height and weight -->
+        <div id="inputs">
+            <!-- Event onchange is used to call function
+                 calculateBMI(height, weight) when the value in either of the
+                 input fields is changed. The parameters are taken from the
+                 input fields.
+            -->
+            <form 
+                onchange=
+                    "calculateBMI(document.getElementById('height').value,
+                    document.getElementById('weight').value);">
+            
+                <label for="height">Height (cm):</label>
+                <input type="number" id="height" name="formHeight" min="1"
+                    max="999" value="170">
+
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" name="formWeight" min="1"
+                    max="999" value="65">
+            </form>
+        </div>
+
+        <!-- Element div for the calculated BMI, min and max BMI. Updated every
+             time the BMI is calculated and on page load). -->
+        <div id="calculatedBMI">
+            <p>JavaScript is disabled or something went wrong</p>
+        </div>
+        <!-- Element div for the min and max BMI. Updated when either
+             changes and on page load). -->
+        <div id="minAndMaxBMI"></div>
+
+        <!-- Element div for the form having the radio button for setting
+             saving to "No" (default) and "Yes".
+        -->
+        <div id="saveSetting">
+            <!-- Event onchange is used to call function store(setting) when
+                 the checked radio button changes. The parameter setting is 
+                 true if "Yes" is checked and false otherwise.
+            -->
+            <form onchange="store(document.getElementById('yes').checked);">
+                <p>Save the data?</p>
+                <label for="no">No</label>
+                <input type="radio" id="no" name="setting" value="No">
+
+                <label for="yes">Yes</label>
+                <input type="radio" id="yes" name="setting" value="Yes">
+            </form>
+        </div>
+
+        <!-- JavaScript functions are in a separate file (bmi.js) -->
+        <script src="bmi.js">
+        </script>
+    </body>
+</html>
